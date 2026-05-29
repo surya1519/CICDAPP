@@ -1,0 +1,31 @@
+name: Deploy App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/username
+            if [ ! -d "app" ]; then
+              git clone https://github.com/YOUR_USERNAME/simple-ci-cd-app.git app
+            fi
+            cd app
+            git pull origin main
+            npm install
+            pkill node || true
+            nohup npm start > app.log 2>&1 &
