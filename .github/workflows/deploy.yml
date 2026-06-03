@@ -22,7 +22,7 @@ jobs:
           script: |
             cd /home/username
             if [ ! -d "app" ]; then
-              git clone https://github.com/YOUR_USERNAME/simple-ci-cd-app.git app
+              git clone https://github.com/surya1519/CICDAPP.git app
             fi
             cd app
             git pull origin main
