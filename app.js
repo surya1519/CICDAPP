@@ -6,5 +6,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(3000, "0.0.0.0", () => {
-console.log("server is running on port 3000");
+console.log("I am trying to run the CI/CD app from EC2 servcer");
 });
