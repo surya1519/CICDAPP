@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-	res.send("I am running in Container nowD");
+	res.send("Hello How are you");
 });
 
 app.listen(3000, "0.0.0.0", () => {
