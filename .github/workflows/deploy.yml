@@ -21,12 +21,22 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           debug: true
           script: |
-            cd /home/ec2-user
-            if [ ! -d "app" ]; then
-              git clone https://github.com/surya1519/CICDAPP.git app
-            fi
-            cd app
+            echo "naviage to app directory"
+            cd ~/app
+
+            echo "pull latest code"
             git pull origin main
-            npm install
-            pkill node || true
-            nohup npm start > app.log 2>&1 &
+
+            echo "stop existing container"
+            docker stop cicdapp || true
+
+            echo "remove container"
+            docker rm cicdapp || true
+            
+            echo "build new docker image"
+            docker build -t cicdapp .
+
+            echo "run new container"
+            docker run -d -p 3000:3000 --name cicdapp cicdapp
+
+            echo "Deployment completed" 
