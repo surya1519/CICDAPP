@@ -1,0 +1,5 @@
+
+> cicdapp@1.0.0 start
+> node app.js
+
+I am trying to run the CI/CD app from EC2 servcer
