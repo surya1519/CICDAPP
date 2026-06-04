@@ -34,9 +34,6 @@ jobs:
             docker rm cicdapp || true
             
             echo "build new docker image"
-            docker build -t cicdapp .
-
-            echo "run new container"
-            docker run -d -p 3000:3000 --name cicdapp cicdapp
+            docker build -t cicdapp . && docker rm -f cicdapp || true && docker run -d -p 3000:3000 --name cicdapp cicdapp
 
             echo "Deployment completed" 
